@@ -1,0 +1,54 @@
+﻿2016/12/30 16:35:25 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\ProgramData\NVIDIA Corporation\CUDA Samples\v8.0\FEM_projects\3DFEM_GPU1\3DFEM_GPU.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I./ /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\/include" /I../../common/inc /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\include" /Zi /nologo /W3 /WX- /Od /D WIN32 /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64/Debug/" /Fd"x64/Debug/vc120.pdb" /Gd /TP /errorReport:prompt initialization.cpp input.cpp K_level1.cpp K_level2.cpp K_level3.cpp K_level4.cpp load.cpp log_maker.cpp main.cpp output.cpp RemoveNodes.cpp remove_matrix.cpp solve_matrix.cpp stress_strain.cpp timer.cpp
+         timer.cpp
+         stress_strain.cpp
+         solve_matrix.cpp
+     1>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\include\cuda_runtime.h : warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+     1>c:\program files\nvidia gpu computing toolkit\cuda\v8.0\include\cuda_runtime_api.h(1946): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+         remove_matrix.cpp
+         RemoveNodes.cpp
+         output.cpp
+     1>output.cpp(91): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356) : 'sprintf' の宣言を確認してください。
+     1>output.cpp(94): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 'strcat' の宣言を確認してください。
+     1>output.cpp(95): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 'strcat' の宣言を確認してください。
+     1>output.cpp(96): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 'strcat' の宣言を確認してください。
+         main.cpp
+         log_maker.cpp
+         load.cpp
+         K_level4.cpp
+         K_level3.cpp
+         K_level2.cpp
+         K_level1.cpp
+         input.cpp
+         initialization.cpp
+         コードを生成中...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"../../bin/win64/Debug//3DFEM_GPU.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\lib\x64" cublas.lib cusparse.lib cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"../../bin/win64/Debug/3DFEM_GPU.pdb" /SUBSYSTEM:CONSOLE /STACK:"10000000" /LARGEADDRESSAWARE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"../../bin/win64/Debug/3DFEM_GPU.lib" /MACHINE:X64 x64/Debug/solve_matirux_gpu.cu.obj
+         x64/Debug/initialization.obj
+         x64/Debug/input.obj
+         x64/Debug/K_level1.obj
+         x64/Debug/K_level2.obj
+         x64/Debug/K_level3.obj
+         x64/Debug/K_level4.obj
+         x64/Debug/load.obj
+         x64/Debug/log_maker.obj
+         x64/Debug/main.obj
+         x64/Debug/output.obj
+         x64/Debug/RemoveNodes.obj
+         x64/Debug/remove_matrix.obj
+         x64/Debug/solve_matrix.obj
+         x64/Debug/stress_strain.obj
+         x64/Debug/timer.obj
+            ライブラリ ../../bin/win64/Debug/3DFEM_GPU.lib とオブジェクト ../../bin/win64/Debug/3DFEM_GPU.exp を作成中
+         3DFEM_GPU.vcxproj -> C:\ProgramData\NVIDIA Corporation\CUDA Samples\v8.0\FEM_projects\3DFEM_GPU1\../../bin/win64/Debug/3DFEM_GPU.exe
+     1>プロジェクト "C:\ProgramData\NVIDIA Corporation\CUDA Samples\v8.0\FEM_projects\3DFEM_GPU1\3DFEM_GPU.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:03.13
