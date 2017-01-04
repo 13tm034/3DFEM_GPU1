@@ -7,6 +7,8 @@ void RemoveNodesCSR(double *BC_CSR_Kval, int *BC_CSR_col, int *BC_CSR_row,double
 
 	for (int num = 0; num < N; num++){
 		if (no[num].point == 0){
+			printf("flag\n");
+			system("PAUSE");
 			for (int axis = 0; axis < 3; axis++){
 
 				int DenseIndex = num * 3 + axis;

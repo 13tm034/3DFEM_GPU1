@@ -33,6 +33,8 @@ void  initial( double *S, node *no, element *el, material *ml,int N,int E,int M)
 		el[i].m = 0;
 		el[i].mises = 0;
 		el[i].rm = false;
+		el[i].point = 0;
+		el[i].Restraint = false;
 		for (int j = 0; j < 8; j++){
 			el[i].node[j] = 0;
 		}

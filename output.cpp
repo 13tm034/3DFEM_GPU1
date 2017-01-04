@@ -95,7 +95,7 @@ void result_output(element *el, node *no, double *S, int E, int N, int count, in
 	strcat(file_name, num);
 	strcat(file_name, ext);
 
-	int ElementNumber = E - NumberOfRemoved;
+	int ElementNumber = E - NumberOfRemoved+1;
 
 	if (errors = fopen_s(&fp_result, file_name, "w") != 0){
 		printf("\n file open failed \n");
@@ -137,7 +137,7 @@ void result_output(element *el, node *no, double *S, int E, int N, int count, in
 	//fprintf(fp_result, "LOOKUP_TABLE default\n");
 	fprintf(fp_result, "VECTORS displacement double\n");
 	for (int i = 0; i < N; i++){
-		fprintf(fp_result, "%15.10f %15.10f %15.10f\n", S[3 * i] ,S[3 * i + 1], S[3 * i + 2]);
+		fprintf(fp_result, "%15.10f %15.10f %15.10f\n",no[i].xd[0],no[i].xd[1],no[i].xd[2]);
 	}
 	fprintf(fp_result, "VECTORS nodal_force double\n");
 	for (int i = 0; i < N; i++){

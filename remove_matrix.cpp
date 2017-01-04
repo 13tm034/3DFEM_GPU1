@@ -59,7 +59,7 @@ void remove_matrix(int ElementToBeRemoved[][100], int num, double **K, element *
 
 void RemoveMatrixCSR(int ElementToBeRemoved[][100], int num, double *CSR_Kval, int *CSR_col, int *CSR_row, element *el, node *no, material *m){
 	
-	int lim = ElementToBeRemoved[num][0];
+	int lim = ElementToBeRemoved[num][0]+1;
 	for (int Index = 1; Index < lim; Index++){
 		int ENTR = ElementToBeRemoved[num][Index];
 		el[ENTR].rm = true;
@@ -71,7 +71,7 @@ void RemoveMatrixCSR(int ElementToBeRemoved[][100], int num, double *CSR_Kval, i
 			n[i] = el[ENTR].node[i];
 			no[n[i]].point--;
 		}
-
+		int count = 0;
 		for (int Row = 0; Row < 8; Row++){
 		for (int Col = 0; Col < 8; Col++){
 			
@@ -81,17 +81,26 @@ void RemoveMatrixCSR(int ElementToBeRemoved[][100], int num, double *CSR_Kval, i
 					int TargetRow = 3 * n[Row] + RowXYZ;
 					int TargetCol = 3 * n[Col] + ColXYZ;
 					double DividingVal = RKe[3 * Row + RowXYZ][3 * Col + ColXYZ];
-						
+					printf("%d,%d,%lf\t",TargetRow, TargetCol,DividingVal);
+					int check = 0;
 					for (int ValIndex = CSR_row[TargetRow]; ValIndex < CSR_row[TargetRow + 1]; ValIndex++){
-						if (CSR_col[ValIndex] == TargetCol)CSR_Kval[ValIndex] = CSR_Kval[ValIndex] - DividingVal;
+						if (CSR_col[ValIndex] == TargetCol){
+							CSR_Kval[ValIndex] = CSR_Kval[ValIndex] - DividingVal;
+							printf("%d,%d,%lf\n",TargetRow, TargetCol,CSR_Kval[ValIndex]);
+							count++;
+							check = 1;
+						}
 					}
+					if (check == 0)printf("\n");
+					
 			}				
 			}
 		}
 		}
-
+		printf("count=%d\n", count);
 
 	}
+	system("PAUSE");
 }
 
 

@@ -119,8 +119,19 @@ int main(void){
 		//el[i].node[6] = element[6];
 		//el[i].node[7] = element[7];
 		
+		
 	}
 
+
+	for (int i = 0; i < E; i++){
+		for (int j = 0; j < 8; j++){
+			int nd = el[i].node[j];
+			el[i].point += no[nd].point;
+			for (int xyz = 0; xyz < 3; xyz++){
+				if (no[nd].xrc[xyz] == 1)el[i].Restraint = true;
+			}
+		}
+	}
 
 	info_M(m);
 	printf("N=%d,E=%d,M=%d\n", N, E, M);
@@ -131,7 +142,7 @@ int main(void){
 	}
 
 	for (int i = 0; i < E; i++){
-		printf("element:%d material: %d (",i,el[i].m);
+		printf("element:%d material: %d point:%d Restraint:%d (",i,el[i].m,el[i].point,el[i].Restraint);
 
 		for (int j = 0; j < 8; j++){
 
@@ -210,7 +221,9 @@ int main(void){
 		CSR_row[i] = preCSR_row[i];
 	}
 	printf("\n");
-
+	for (int i = CSR_row[3099]; i <CSR_row[3100]; i++){
+		if (CSR_col[i] == 1703)printf("CSRK=%lf\n", CSR_Kval[i]);
+	}
 	system("PAUSE");
 	free(COO_Kval);
 	free(COO_col);
@@ -223,7 +236,7 @@ int main(void){
 	int BC_RealNumberOfValues = 0;
 
 	for (int i = 0; i < RealNumberOfValues; i++){
-		if (CSR_Kval[i] != 0)BC_RealNumberOfValues++;
+		if (CSR_Kval[i] != 0 )BC_RealNumberOfValues++;
 	}
 
 
@@ -235,18 +248,20 @@ int main(void){
 	BC_CSR_row = (int *)malloc(sizeof(int)*(N+N+N+1));
 
 	CSR2BC_CSR(CSR_Kval, CSR_col, CSR_row, BC_CSR_Kval, BC_CSR_col, BC_CSR_row, N);
+	for (int i = BC_CSR_row[3099]; i < BC_CSR_row[3100]; i++){
+		if (BC_CSR_col[i] == 1703)printf("BC_CSRK=%lf", BC_CSR_Kval[i]);
+	}
 
-
-	system("PAUSE");
 	S_BC(S, N);
 
 	/******************************solve matrix********************************/
 
 
 	int ElementToBeRemoved[2][100] = {}; //第一列→消す要素数,第二列→実際に消す要素番号
-	ElementToBeRemoved[0][0] = 0;
+	ElementToBeRemoved[0][0] =1;
+	ElementToBeRemoved[0][1] = 350;
 	ElementToBeRemoved[1][0] = 1;
-	ElementToBeRemoved[1][1] = 314;
+	ElementToBeRemoved[1][1] = 350;
 	int ETRcount = 2;				//ElementToBeRemovedの行数
 	int count = 0;					//行の位置
 	int NumberOfRemoeved = 0;		//削除した要素の数
@@ -266,11 +281,7 @@ int main(void){
 		solve_matrix_gpu_CSR(BC_CSR_Kval, BC_CSR_col, BC_CSR_row, S, N, no, BC_RealNumberOfValues);
 		end = clock();
 		printf("処理時間　%d\n", end - start);
-		for (int i = 0; i < N; i++){
-			no[i].xd[0] = S[i + i + i];
-			no[i].xd[1] = S[i + i + i + 1];
-			no[i].xd[2] = S[i + i + i + 2];
-		}
+
 		strain_stress_calc(no, el, m, E, N, M);
 		result_output(el, no, S, E, N, count, NumberOfRemoeved);
 		system("PAUSE");

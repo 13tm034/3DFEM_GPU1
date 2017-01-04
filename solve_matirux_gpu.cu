@@ -440,7 +440,7 @@ void solve_matrix_gpu_CSR(double *CSR_Kval,int *CSR_col,int *CSR_row, double *b,
 			
 		Iteration++;
 		error[Iteration] = ResidualError;
-		//printf("iteration:\t%d\tresidual error:\t%1.20f\n", Iteration, error[Iteration]);
+		printf("iteration:\t%d\tresidual error:\t%1.20f\n", Iteration, error[Iteration]);
 		//if (ResidualError < EPS*EPS){
 		//	double  stability = fabs(error[Iteration] - error[Iteration - 1000]);
 		//	if (stability < EPS*EPS / 10){
@@ -464,21 +464,12 @@ void solve_matrix_gpu_CSR(double *CSR_Kval,int *CSR_col,int *CSR_row, double *b,
 	end = clock();
 	printf("ˆ—ŽžŠÔ-CG@%d\n", end - start);
 	cudaMemcpy(hx, dx, sizeof(double)*(N + N + N), cudaMemcpyDeviceToHost);
-	for (int i = 0; i < N + N + N; i++){
-		b[i] = hx[i] / sqrt(TempDiagonal[i]);
+	for (int i = 0; i < N; i++){
+		no[i].xd[0] = hx[3*i] / sqrt(TempDiagonal[3*i]);
+		no[i].xd[1] = hx[3*i+1] / sqrt(TempDiagonal[3*i+1]);
+		no[i].xd[2] = hx[3*i+2] / sqrt(TempDiagonal[3*i+2]);
 	}
 
-	FILE *fp_errors;
-	errno_t errors;
-	char file_name[100] = {};
-	printf("FILE NAME:");
-	scanf("%s", file_name);
-	if (errors = fopen_s(&fp_errors, file_name, "w") != 0){
-		printf("\n file open failed \n");
-	}
-	for (int i = 0; i < Iteration; i++){
-		fprintf(fp_errors, "%d,%31.30f\n", i,error[i]);
-	}
-	fclose(fp_errors);
+
 }
 

@@ -99,6 +99,7 @@ void AddKe2preCOO(element *el, double Ke[][24], double *COO_Kval, int *COO_col, 
 							COO_Kval[Index] = (double)Ke[ElementNode_row * 3 + RowXYZ][ElementNode_col * 3 + ColXYZ];
 							COO_col[Index] = n[ElementNode_col] * 3 + ColXYZ;
 							COO_row[Index] = n[ElementNode_row] * 3 + RowXYZ;
+							if (ElementNumber==350) printf("%d,%d,%lf\n", n[ElementNode_row] * 3 + RowXYZ, n[ElementNode_col] * 3 + ColXYZ,COO_Kval[Index]);
 							Index++;
 				}
 			}
@@ -133,7 +134,7 @@ void preCOO2COO(double *COO_Kval, int *COO_col, int *COO_row, int MaximumNumberO
 	}
 
 	for (int i = 0; i < MaximumNumberOfValues; i++){
-		if (COO_Kval[i] != 0)NonZeroCount++;
+		if (COO_Kval[i] != 0 || COO_col [i] != 0 || COO_row[i] != 0)NonZeroCount++;
 	}
 	printf("NonZeroCount=%d\n", NonZeroCount);
 
@@ -153,8 +154,8 @@ void preCOO2COO(double *COO_Kval, int *COO_col, int *COO_row, int MaximumNumberO
 
 	printf("REMOVE ZERO ELEMENTS\n");
 	int NonZeroIndex = 0;
-	for (int i = 0; i < MaximumNumberOfValues; i++){
-		if (COO_Kval[i] != 0){
+	for (int i = *RealNumberOfValues; i < MaximumNumberOfValues; i++){
+		if (COO_Kval[i] != 0 || COO_col [i] != 0 || COO_row[i] != 0){
 			tempCOO_Kval[NonZeroIndex] = COO_Kval[i];
 			tempCOO_col[NonZeroIndex] = COO_col[i];
 			tempCOO_row[NonZeroIndex] = COO_row[i];

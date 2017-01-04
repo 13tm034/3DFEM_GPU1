@@ -193,6 +193,7 @@ void addKe(double pKe[][24], double Ke[][24]){
 
 
 void QsortPreCOO(double *COO_Kval, int *COO_col, int *COO_row, int left, int right){
+	//“¯‚¶row‚É‚¨‚¢‚Ä•À‚Ñ‘Ö‚¦
 	int pivot_row, pivot_col, l_hold, r_hold;
 	double pivot_Kval;
 	l_hold = left;

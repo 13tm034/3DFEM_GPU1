@@ -19,6 +19,7 @@ void Kmatrix(node *no, element *el, material *m, double *preCOO_Kval, int *preCO
 		double Ke[24][24] = {};
 		//Kematrix_log(i);
 		Kematrix(no, el, m, Ke, i);			//Keマトリクスの作成
+
 		//Kematrix_log1(Ke, i);
 		AddKe2preCOO(el, Ke, preCOO_Kval, preCOO_col, preCOO_row, MaximumNumberOfValues, i);
 		//addK(el, Ke,K,i,fp_element);
@@ -28,7 +29,15 @@ void Kmatrix(node *no, element *el, material *m, double *preCOO_Kval, int *preCO
 	//並び変えて0要素を圧縮
 	printf("SORTING PROCESS\n");
 	Sort_preCOO(preCOO_Kval, preCOO_col, preCOO_row, MaximumNumberOfValues);
+
 	preCOO2COO(preCOO_Kval, preCOO_col, preCOO_row, MaximumNumberOfValues,RealNumberOfValues);
+	//for (int i = MaximumNumberOfValues-1; i > MaximumNumberOfValues-100; i--){
+	//	printf("%lf,%d,%d\n", preCOO_Kval[i], preCOO_col[i], preCOO_row[i]);
+	//}
+	//for (int i = 0; i < 100; i++){
+	//	printf("%lf,%d,%d\n", preCOO_Kval[i], preCOO_col[i], preCOO_row[i]);
+	//}
+	system("PAUSE");
 
 
 	for (int i = 0; i < *RealNumberOfValues; i++){
@@ -52,7 +61,6 @@ void Kmatrix(node *no, element *el, material *m, double *preCOO_Kval, int *preCO
 
 
 	printf("RealNumberOfValues=%d\n", *RealNumberOfValues);
-	system("PAUSE");
 }
 
 void setBC(node *no, double *S, double **K, int E, int N, int M){

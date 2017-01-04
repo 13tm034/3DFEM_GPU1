@@ -70,6 +70,8 @@ typedef struct elements{
 	double mises;		//ƒ~[ƒ[ƒX‰—Í
 	bool rm;			//false 
 	int m;				//Ş—¿”Ô†
+	int point;
+	bool Restraint;
 }element;
 
 typedef struct materials{
