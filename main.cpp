@@ -91,23 +91,23 @@ int main(void){
 			element[j] = el[i].node[j];
 			no[element[j]].point++;
 		}
-		//el[i].node[0] = element[4];
-		//el[i].node[1] = element[7];
-		//el[i].node[2] = element[6];
-		//el[i].node[3] = element[5];
-		//el[i].node[4] = element[0];
-		//el[i].node[5] = element[3];
-		//el[i].node[6] = element[2];
-		//el[i].node[7] = element[1];//16
-
-		el[i].node[0] = element[3];
+		el[i].node[0] = element[4];
 		el[i].node[1] = element[7];
-		el[i].node[2] = element[4];
-		el[i].node[3] = element[0];
-		el[i].node[4] = element[2];
-		el[i].node[5] = element[6];
-		el[i].node[6] = element[5];
-		el[i].node[7] = element[1]; //900
+		el[i].node[2] = element[6];
+		el[i].node[3] = element[5];
+		el[i].node[4] = element[0];
+		el[i].node[5] = element[3];
+		el[i].node[6] = element[2];
+		el[i].node[7] = element[1];//16
+
+		//el[i].node[0] = element[3];
+		//el[i].node[1] = element[7];
+		//el[i].node[2] = element[4];
+		//el[i].node[3] = element[0];
+		//el[i].node[4] = element[2];
+		//el[i].node[5] = element[6];
+		//el[i].node[6] = element[5];
+		//el[i].node[7] = element[1]; //900
 
 
 		//el[i].node[0] = element[0];
@@ -236,7 +236,7 @@ int main(void){
 	int BC_RealNumberOfValues = 0;
 
 	for (int i = 0; i < RealNumberOfValues; i++){
-		if (CSR_Kval[i] != 0 )BC_RealNumberOfValues++;
+		if (CSR_Kval[i] != 0 && CSR_col[i]!=0 )BC_RealNumberOfValues++;
 	}
 
 
@@ -258,8 +258,8 @@ int main(void){
 
 
 	int ElementToBeRemoved[2][100] = {}; //‘æˆê—ñ¨Á‚·—v‘f”,‘æ“ñ—ñ¨ŽÀÛ‚ÉÁ‚·—v‘f”Ô†
-	ElementToBeRemoved[0][0] =1;
-	ElementToBeRemoved[0][1] = 350;
+	ElementToBeRemoved[0][0] =0;
+	//ElementToBeRemoved[0][1] = 350;
 	ElementToBeRemoved[1][0] = 1;
 	ElementToBeRemoved[1][1] = 350;
 	int ETRcount = 2;				//ElementToBeRemoved‚Ìs”
@@ -267,6 +267,13 @@ int main(void){
 	int NumberOfRemoeved = 0;		//íœ‚µ‚½—v‘f‚Ì”
 	int PreCount = 0;
 	
+
+	for (int i = 0; i < N + N + N; i++){
+		for (int j = BC_CSR_row[i]; j < BC_CSR_row[i + 1]; j++){
+			if(i==BC_CSR_col[j])printf("%d,%d\t%lf\n", i, BC_CSR_col[j], BC_CSR_Kval[j]);
+		}
+	}
+
 	while (count != ETRcount){
 		DISPLAY("SOLVING MATRIX");
 		NumberOfRemoeved += ElementToBeRemoved[count][0];

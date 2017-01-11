@@ -126,15 +126,19 @@ void preCOO2COO(double *COO_Kval, int *COO_col, int *COO_row, int MaximumNumberO
 			while (COO_row[i]==COO_row[j]){
 				if (COO_col[i] == COO_col[j] ){
 					COO_Kval[i] = COO_Kval[i]+ COO_Kval[j];
-					COO_Kval[j] = 0;					
+					COO_Kval[j] = 0;
+					COO_col[j] = 0;
 				}
 				j++;
 			}
 		}
 	}
-
+	printf("-------------------------\n");
+	for (int i = 0; i < 100; i++){
+		printf("%d\t%d\t%lf\n", COO_col[i], COO_row[i], COO_Kval[i]);
+	}
 	for (int i = 0; i < MaximumNumberOfValues; i++){
-		if (COO_Kval[i] != 0 || COO_col [i] != 0 || COO_row[i] != 0)NonZeroCount++;
+		if (COO_Kval[i] != 0&& COO_col[i]!=0)NonZeroCount++;
 	}
 	printf("NonZeroCount=%d\n", NonZeroCount);
 
@@ -155,7 +159,7 @@ void preCOO2COO(double *COO_Kval, int *COO_col, int *COO_row, int MaximumNumberO
 	printf("REMOVE ZERO ELEMENTS\n");
 	int NonZeroIndex = 0;
 	for (int i = *RealNumberOfValues; i < MaximumNumberOfValues; i++){
-		if (COO_Kval[i] != 0 || COO_col [i] != 0 || COO_row[i] != 0){
+		if (COO_Kval[i] != 0 && COO_col[i]!=0){
 			tempCOO_Kval[NonZeroIndex] = COO_Kval[i];
 			tempCOO_col[NonZeroIndex] = COO_col[i];
 			tempCOO_row[NonZeroIndex] = COO_row[i];

@@ -65,10 +65,10 @@ void RemoveMatrixCSR(int ElementToBeRemoved[][100], int num, double *CSR_Kval, i
 		el[ENTR].rm = true;
 		double RKe[24][24] = {};
 		Kematrix(no, el, m, RKe, ENTR);			//Keマトリクスの作成
-		
 		int n[8] = {};
 		for (int i = 0; i < 8; i++){
 			n[i] = el[ENTR].node[i];
+			printf("node%d\n", n[i]);
 			no[n[i]].point--;
 		}
 		int count = 0;
@@ -81,12 +81,12 @@ void RemoveMatrixCSR(int ElementToBeRemoved[][100], int num, double *CSR_Kval, i
 					int TargetRow = 3 * n[Row] + RowXYZ;
 					int TargetCol = 3 * n[Col] + ColXYZ;
 					double DividingVal = RKe[3 * Row + RowXYZ][3 * Col + ColXYZ];
-					printf("%d,%d,%lf\t",TargetRow, TargetCol,DividingVal);
+					printf("%d,%d,%lf", TargetCol,TargetRow,DividingVal);
 					int check = 0;
 					for (int ValIndex = CSR_row[TargetRow]; ValIndex < CSR_row[TargetRow + 1]; ValIndex++){
 						if (CSR_col[ValIndex] == TargetCol){
 							CSR_Kval[ValIndex] = CSR_Kval[ValIndex] - DividingVal;
-							printf("%d,%d,%lf\n",TargetRow, TargetCol,CSR_Kval[ValIndex]);
+							printf("\t%d,%d,%lf\n",TargetRow, TargetCol,CSR_Kval[ValIndex]);
 							count++;
 							check = 1;
 						}

@@ -29,8 +29,13 @@ void Kmatrix(node *no, element *el, material *m, double *preCOO_Kval, int *preCO
 	//ï¿Ç—ïœÇ¶Çƒ0óvëfÇà≥èk
 	printf("SORTING PROCESS\n");
 	Sort_preCOO(preCOO_Kval, preCOO_col, preCOO_row, MaximumNumberOfValues);
-
+	for (int i = 0; i < MaximumNumberOfValues; i++){
+		if (preCOO_col[i] == 1703 && preCOO_row[i] == 3099)printf("%lf\n", preCOO_Kval[i]);
+	}
 	preCOO2COO(preCOO_Kval, preCOO_col, preCOO_row, MaximumNumberOfValues,RealNumberOfValues);
+	for (int i = 0; i < MaximumNumberOfValues; i++){
+		if (preCOO_col[i] == 1703 && preCOO_row[i] == 3099)printf("%lf\n", preCOO_Kval[i]);
+	}
 	//for (int i = MaximumNumberOfValues-1; i > MaximumNumberOfValues-100; i--){
 	//	printf("%lf,%d,%d\n", preCOO_Kval[i], preCOO_col[i], preCOO_row[i]);
 	//}
@@ -99,7 +104,7 @@ void CSR2BC_CSR(double *CSR_Kval, int *CSR_col, int *CSR_row, double *BC_CSR_Kva
 	for (int i = 0; i < N + N + N; i++){
 		BC_CSR_row[i] = count;
 		for (int j = CSR_row[i]; j < CSR_row[i + 1]; j++){
-			if (CSR_Kval[j] != 0){
+			if (CSR_Kval[j] != 0 && CSR_col[i]!=0){
 				BC_CSR_Kval[count] = CSR_Kval[j];
 				BC_CSR_col[count] = CSR_col[j];
 				count++;
